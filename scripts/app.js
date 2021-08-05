@@ -6,6 +6,11 @@ const updateMssg = document.querySelector('.update-mssg');
 const showName = document.querySelector('.current-name');
 
 
+// chceck local storage for a name
+const username = localStorage.username ? localStorage.username : 'Anonymous';
+showName.innerText = username;
+
+
 // create class instances
 const chatroom = new Chatroom('general', 'Anonymous');
 const chatUI = new ChatUI(chatList);
