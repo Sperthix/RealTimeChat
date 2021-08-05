@@ -41,6 +41,7 @@ class Chatroom {
 
     updateName(username){
         this.username = username;
+        console.log(`Name updated, hello ${username}!`)
     }
 
     updateRoom(room){
