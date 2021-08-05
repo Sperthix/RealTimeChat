@@ -4,6 +4,7 @@ const newChatForm = document.querySelector('.new-chat');
 const newNameForm = document.querySelector('.new-name');
 const updateMssg = document.querySelector('.update-mssg');
 const showName = document.querySelector('.current-name');
+const rooms = document.querySelector('.chat-rooms');
 
 
 // chceck local storage for a name
@@ -20,7 +21,7 @@ const chatUI = new ChatUI(chatList);
 chatroom.getChats( data => chatUI.render(data));
 
 
-// add a new chat
+// add a new chat - listener
 newChatForm.addEventListener('submit', e => {
     e.preventDefault();
     const message = newChatForm.message.value.trim();
@@ -29,7 +30,7 @@ newChatForm.addEventListener('submit', e => {
     .catch( err => console.log(err));
 });
 
-// update name
+// update name - listener
 newNameForm.addEventListener('submit', e => {
     e.preventDefault();
     // get name from input field
@@ -40,4 +41,13 @@ newNameForm.addEventListener('submit', e => {
     updateMssg.innerText = `Name updated, hello ${newName}!`; 
     showName.innerText = newName;
     setTimeout( () => updateMssg.innerText = '', 3000);
+});
+
+// update chatroom - listener
+rooms.addEventListener('click', e => {
+    if(e.target.tagName === 'BUTTON'){
+        chatUI.clear();
+        chatroom.updateRoom(e.target.getAttribute('id'));
+        chatroom.getChats( chat => chatUI.render(chat));
+    }
 });
