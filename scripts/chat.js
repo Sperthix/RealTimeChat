@@ -32,10 +32,15 @@ class Chatroom {
 
     getChats(callback){
         this.chats
+        .where('room', '==', this.room)
+        .orderBy('created_at')
         .onSnapshot( snapshot => {
             snapshot.docChanges().forEach( change => {
                 if (change.type === 'added'){
                     callback(change.doc.data());
+                }
+                else if(change.type === 'deleted'){
+                    console.log('deleted');
                 }
             })
         });
